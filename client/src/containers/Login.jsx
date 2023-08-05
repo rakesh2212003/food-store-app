@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { LoginBg, Logo } from '../assets/img'
 import { FaEnvelope, FaLock, FcGoogle }  from '../assets/icons'
 import { LoginInput } from '../components'
 import { buttonClick } from '../animations'
 import { validateUserJWTToken } from '../api'
+import { setUserDetails } from '../context/actions/userActions'
 
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { app } from '../config/firebase.config'
@@ -23,6 +25,15 @@ const Login = () => {
     const provider = new GoogleAuthProvider()
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const user = useSelector(state => state.user)
+
+    useEffect(() => {
+        if(user){
+            navigate('/', {replace: true})
+        }
+    }, [user])
 
     // Login with google
     const loginWithGoogle = async() => {
@@ -31,7 +42,7 @@ const Login = () => {
                 if(cred){
                     cred.getIdToken().then(token => {
                         validateUserJWTToken(token).then(data => {
-                            console.log(data)
+                            dispatch(setUserDetails(data))
                         })
                         navigate('/', { replace: true })
                     })
@@ -57,7 +68,7 @@ const Login = () => {
                         if(cred){
                             cred.getIdToken().then(token => {
                                 validateUserJWTToken(token).then(data => {
-                                    console.log(data)
+                                    dispatch(setUserDetails(data))
                                 })
                                 navigate('/', { replace: true })
                             })
@@ -78,7 +89,7 @@ const Login = () => {
                     if(cred){
                         cred.getIdToken().then(token => {
                             validateUserJWTToken(token).then(data => {
-                                console.log(data)
+                                dispatch(setUserDetails(data))
                             })
                             navigate('/', { replace: true })
                         })
