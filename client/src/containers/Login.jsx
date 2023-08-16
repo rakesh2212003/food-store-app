@@ -4,13 +4,19 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { LoginBg, Logo } from '../assets/img'
-import { FaEnvelope, FaLock, FcGoogle }  from '../assets/icons'
+import { FaEnvelope, FaLock, FaUserAlt, FcGoogle }  from '../assets/icons'
 import { LoginInput } from '../components'
 import { buttonClick } from '../animations'
 import { validateUserJWTToken } from '../api'
 import { setUserDetails } from '../context/actions/userActions'
 
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { 
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+} from 'firebase/auth'
 import { app } from '../config/firebase.config'
 
 const Login = () => {
@@ -126,7 +132,7 @@ const Login = () => {
                 <div className='w-full flex flex-col items-center justify-center gap-4 px-4 md:px-12 py-4'>
                     {isSignup && (
                         <LoginInput 
-                            icon={<FaLock className='text-xl text-textColor'/>}
+                            icon={<FaUserAlt className='text-xl text-textColor'/>}
                             type={"text"}
                             placeHolder={"Display Name"}
                             inputState={userName}
@@ -138,7 +144,7 @@ const Login = () => {
                     <LoginInput 
                         icon={<FaEnvelope className='text-xl text-textColor'/>}
                         type={"Email"}
-                        placeHolder={"Email Here"}
+                        placeHolder={"Email ID"}
                         inputState={userEmail}
                         inputStateFunc={setUserEmail}
                         isSignup={isSignup}
@@ -147,7 +153,7 @@ const Login = () => {
                     <LoginInput 
                         icon={<FaLock className='text-xl text-textColor'/>}
                         type={"password"}
-                        placeHolder={"Password Here"}
+                        placeHolder={"Create Password"}
                         inputState={password}
                         inputStateFunc={setPassword}
                         isSignup={isSignup}
@@ -157,7 +163,7 @@ const Login = () => {
                         <LoginInput 
                             icon={<FaLock className='text-xl text-textColor'/>}
                             type={"password"}
-                            placeHolder={"Conform Password"}
+                            placeHolder={"Confirm Password"}
                             inputState={confirmPassword}
                             inputStateFunc={setConfirmPassword}
                             isSignup={isSignup}
@@ -168,7 +174,7 @@ const Login = () => {
                     {isSignup ? (
                         <p>Already have an account:{" "}
                             <motion.button
-                            className='text-red-600'
+                            className='text-orange-500'
                                 {...buttonClick}
                                 onClick={() => {setIsSignup(false)}}
                             >
@@ -177,7 +183,7 @@ const Login = () => {
                         </p>
                     ) : ( <p>Doesn't have an account:{" "}
                             <motion.button
-                            className='text-red-600'
+                            className='text-orange-500'
                                 {...buttonClick}
                                 onClick={() => {setIsSignup(true)}}
                             >
@@ -189,7 +195,7 @@ const Login = () => {
                     {/* Sign in / Sign up button */}
                     {isSignup ? (
                         <motion.button
-                            className='w-full px-4 py-2 rounded-md bg-red-500 cursor-pointer text-white text-xl capitalize hover:bg-red-600 transition-all duration-150'
+                            className='w-full px-4 py-2 rounded-md bg-orange-400 cursor-pointer text-white text-xl capitalize hover:bg-orange-500 transition-all duration-150'
                             {...buttonClick}
                             onClick={signUpWithEmailPass}
                         >
@@ -197,7 +203,7 @@ const Login = () => {
                         </motion.button>
                     ) : (
                         <motion.button
-                            className='w-full px-4 py-2 rounded-md bg-red-500 cursor-pointer text-white text-xl capitalize hover:bg-red-600 transition-all duration-150'
+                            className='w-full px-4 py-2 rounded-md bg-orange-400 cursor-pointer text-white text-xl capitalize hover:bg-orange-500 transition-all duration-150'
                             {...buttonClick}
                             onClick={signInWithEmailPass}
                         >

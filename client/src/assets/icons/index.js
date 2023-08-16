@@ -4,6 +4,7 @@ import {
     FaCloudUploadAlt,
     FaCheck,
     FaArrowLeft,
+    FaUserAlt,
 } from "react-icons/fa";
 
 import {
@@ -37,6 +38,7 @@ import {
     HiCurrencyRupee
 } from "react-icons/hi2";
 
+
 export{
     FaEnvelope,
     FaLock,
@@ -56,4 +58,5 @@ export{
     MdDelete,
     FcGoogle,
     FcClearFilters,
+    FaUserAlt,
 };
