@@ -3,10 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { motion } from 'framer-motion'
 
-import './App.css';
 import { Login, Main } from './containers'
 import { validateUserJWTToken } from './api';
 import { setUserDetails } from './context/actions/userActions'
+import { MainLoader } from './components';
 
 import { getAuth } from 'firebase/auth'
 import { app } from './config/firebase.config'
@@ -43,7 +43,7 @@ function App() {
                     className='fixed z-50 inset-0 bg-lightOverlay backdrop-blur-md flex items-center justify-center w-full'
                     {...fadeInOut}
                 >
-                    Loading...
+                    <MainLoader />
                 </motion.div>
             )}
             <Routes>
